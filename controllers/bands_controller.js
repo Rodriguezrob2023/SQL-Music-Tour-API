@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 const { Band } = db;
 
 bands.get('/', async (req, res) => {
-    const { name = '' } = req.query;
+    const { name = '', limit=5, offset=0 } = req.query;
     try {
         const foundBands = await Band.findAll({
             order: [['available_start_time', 'ASC' ], [ 'name', 'ASC']],
@@ -12,7 +12,9 @@ bands.get('/', async (req, res) => {
                 name: {
                     [Op.iLike] : `%${name}%`
                 }
-            }
+            },
+            limit,
+            offset
         });
         res.status(200).json(foundBands);
     } catch (e) {

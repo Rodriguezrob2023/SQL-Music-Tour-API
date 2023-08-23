@@ -5,7 +5,7 @@ const { Stage } = db;
 
 stages.get('/', async(req, res) => {
     try {
-        const { name = '' } = req.query;
+        const { name = '', limit=5, offset=0 } = req.query;
         const foundStage = await Stage.findAll({
             where: {
                 name: {
@@ -15,7 +15,9 @@ stages.get('/', async(req, res) => {
             order: [
                 ['capacity', 'DESC'],
                 ['manager', 'ASC']
-            ]
+            ],
+            limit,
+            offset
         });
         res.status(200).json(foundStage);
     } catch (error) {

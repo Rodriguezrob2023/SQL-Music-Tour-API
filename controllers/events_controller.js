@@ -5,7 +5,7 @@ const { Event } = db;
 
 events.get('/', async(req, res) => {
     try {
-        const { name = '' } = req.query;
+        const { name = '', limit=5, offset=0 } = req.query;
         const foundEvents = await Event.findAll({
             where: {
                 name: {
@@ -15,7 +15,9 @@ events.get('/', async(req, res) => {
             order: [
                 ['date', 'ASC'],
                 ['name', 'ASC']
-            ]
+            ],
+            limit,
+            offset
         });
         res.status(200).json(foundEvents);
     } catch (error) {
