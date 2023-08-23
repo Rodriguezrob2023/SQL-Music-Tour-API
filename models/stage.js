@@ -14,16 +14,28 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Stage.init({
-    stage_id:  DataTypes.INTEGER,
-    name: DataTypes.STRING,
-    date: DataTypes.DATE,
-    start_time: DataTypes.DATE,
-    capacity: DataTypes.INTEGER,
-    manager: DataTypes.STRING,
-    end_time: DataTypes.DATE
+    stage_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    capacity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    manager: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Stage',
+    tableName: 'stages',
+    timestamps: false
   });
   return Stage;
 };

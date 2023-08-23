@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Stages', {
+    await queryInterface.createTable('stages', {
       stage_id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,39 +11,19 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
-      date: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      start_time: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       capacity: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       manager: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
-      end_time: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        allowNull: false
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Stages');
+    await queryInterface.dropTable('stages');
   }
 };
