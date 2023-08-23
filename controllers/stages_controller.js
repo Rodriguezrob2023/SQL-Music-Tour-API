@@ -65,6 +65,20 @@ stages.put('/:id', async (req, res) => {
     }
 });
 
-
+stages.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const deletedStage = await Stage.destroy({
+            where: {
+                stage_id: id
+            }
+        })
+        res.status(200).json({
+            message: `Successfully yeeted stage`
+        })
+    } catch (error) {
+        res.status(500).json(error);
+    }
+})
 
 module.exports = stages;
